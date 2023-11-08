@@ -1,0 +1,17 @@
+<script>
+
+    var rows = parseFloat(prompt("Enter the value of rows:"));
+
+    var currentNum = 1;
+
+    for (var i = 1; i <= rows; i++) {
+        var output = "";
+        for (var j = 1; j <= i; j++) {
+            output += currentNum + " ";
+            currentNum++;
+        }
+        document.write(`<p>${output}</p>`);
+        console.log(output);
+    }
+
+</script>

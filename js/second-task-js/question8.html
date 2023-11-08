@@ -1,0 +1,16 @@
+<script>
+
+    var firstName = prompt("Enter the firstName:");
+    var lastName = prompt("Enter the lastName:");
+
+    const fullName = (firstName, lastName) => {
+        var fullNameString = firstName + " " + lastName;
+        return fullNameString;
+    }
+
+
+    var fullNameResult = fullName(firstName, lastName);
+    console.log(fullNameResult);
+    document.writeln(`<p style="font-size: 70px">${fullNameResult}</p>`);
+
+</script>
