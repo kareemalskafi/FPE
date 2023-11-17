@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Task 4 & 5</title>
+  <style>
+    #myTable {
+      display: none;
+      border-collapse: collapse;
+    }
+
+    #myTable td,
+    #myTable th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    #toggleBtn {
+      padding: 8px 13px;
+      cursor: pointer;
+      background-color: rgb(6, 6, 83);
+      color: white;
+    }
+
+    .info-container {
+      margin-top: 20px;
+    }
+
+    .user-info-container {
+      margin-top: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  <h2>Task 4</h2>
+
+  <div class="info-container">
+    <label for="name">Name:</label>
+    <input type="text" id="name">
+
+    <label for="email">Email:</label>
+    <input type="text" id="email">
+
+    <label for="mobile">Mobile:</label>
+    <input type="text" id="mobile">
+
+    <button id="printBtn">Click On Me To Print</button>
+  </div>
+
+  <div class="user-info-container"></div>
+
+  <script>
+
+    document.getElementById('printBtn').addEventListener('click', () => {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const mobile = document.getElementById('mobile').value;
+
+      if (name && email && mobile) {
+        const userInfoContainer = document.querySelector('.user-info-container').innerHTML=  
+        `
+      <span style="background-color: green;">${name}</span>
+      <span style="background-color: red;">${email}</span>
+      <span style="background-color: yellow;">${mobile}</span>
+       `;
+
+    
+        // Clear input fields after printing info
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('mobile').value = '';
+      } else {
+        alert('Please fill in all fields.');
+      }
+    });
+
+  </script>
+
+
+
+
+  <hr>
+  <hr>
+  <h2>Task 5</h2>
+
+  <button id="toggleBtn">Double Click to Show / Click to Hide Table</button>
+
+  <table id="myTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John Doe</td>
+        <td>30</td>
+        <td>john@example.com</td>
+      </tr>
+      <tr>
+        <td>Jane Smith</td>
+        <td>25</td>
+        <td>jane@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    const toggleBtn = document.getElementById('toggleBtn');
+    const myTable = document.getElementById('myTable');
+
+    toggleBtn.addEventListener('click', () => {
+      if (myTable.style.display === 'none') {
+        myTable.style.display = 'table';
+      } else {
+        myTable.style.display = 'none';
+      }
+    });
+    toggleBtn.addEventListener('dblclick', () => {
+      myTable.style.display = 'none';
+    });
+  </script>
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Storage | Session Storage | Registration & Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f4;
+    }
+
+    form {
+      max-width: 500px;
+      margin: auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      padding: 16px;
+      margin: 16px 0;
+      border-radius: 4px;
+      background-color: #fff;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    
+  </style>
+</head>
+
+<body>
+  <h2>Local Storage</h2>
+  <form id="personalDataForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" required>
+
+    <label>Gender:</label>
+    <div style="display: inline-flex;">
+      <input type="radio" id="male" name="gender" value="male" checked>
+      <label for="male">Male</label>
+    </div>
+    <div style="display: inline-flex;">
+      <input type="radio" id="female" name="gender" value="female">
+      <label for="female">Female</label>
+    </div>
+
+    <label for="description">Brief Description:</label>
+    <textarea id="description" rows="4"></textarea>
+
+    <label for="major">Major and University:</label>
+    <input type="text" id="major" required>
+
+    <label>Programming Languages (Select at least 3):</label>
+    <div style="display: inline-flex;">
+      <input type="checkbox" id="language1" value="JavaScript">
+      <label for="language1">JavaScript</label>
+    </div>
+    <div style="display: inline-flex;">
+      <input type="checkbox" id="language2" value="Python">
+      <label for="language2">Python</label>
+    </div>
+    <div style="display: inline-flex;">
+      <input type="checkbox" id="language3" value="Java">
+      <label for="language3">Java</label>
+    </div>
+<br>
+    <button type="button" onclick="submitForm()">Submit</button>
+  </form>
+
+  <div id="cardsContainer"></div>
+
+  <script>
+    const submitForm = () => {
+      var name = document.getElementById('name').value;
+      var age = document.getElementById('age').value;
+      var gender = document.querySelector('input[name="gender"]:checked').value;
+      var description = document.getElementById('description').value;
+      var major = document.getElementById('major').value;
+      var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+      var languages = [];
+      checkboxes.forEach(checkbox => {
+        languages.push(checkbox.value);
+      });
+
+      var userData = {
+        name: name,
+        age: age,
+        gender: gender,
+        description: description,
+        major: major,
+        languages: languages
+      };
+
+      // Retrieve existing data from local storage
+      var existingData = JSON.parse(localStorage.getItem('userDataArray')) || [];
+
+      // Add new data to the array
+      existingData.push(userData);
+
+      // Save the updated array back to local storage
+      localStorage.setItem('userDataArray', JSON.stringify(existingData));
+
+      // Display the card
+      displayCard(userData);
+    }
+
+    const loadExistingData = () => {
+      var existingData = JSON.parse(localStorage.getItem('userDataArray')) || [];
+
+      // Display existing cards
+      existingData.forEach(function (data) {
+        displayCard(data);
+      });
+    }
+
+    const displayCard = (userData) => {
+      var cardContainer = document.getElementById('cardsContainer');
+      var card = document.createElement('div');
+      card.classList.add('card');
+      card.innerHTML = `
+      <strong>Name:</strong> ${userData.name} <br>
+      <strong>Age:</strong> ${userData.age} <br>
+      <strong>Gender:</strong> ${userData.gender} <br>
+      <strong>Description:</strong> ${userData.description} <br>
+      <strong>Major and University:</strong> ${userData.major} <br>
+      <strong>Programming Languages:</strong> ${userData.languages.join(', ')}
+    `;
+
+      cardContainer.appendChild(card);
+    }
+
+    // Load existing data on page load
+    window.onload = () => {
+      loadExistingData();
+    };
+  </script>
+
+  <hr>
+  <hr>
+  <hr>
+  <hr>
+  <h2>Session Storage</h2>
+
+
+  <form id="projectDetailsFormSession">
+    <label for="subject">Subject:</label>
+    <input type="text" id="subject" required>
+
+    <label for="description">Description:</label>
+    <textarea id="descriptionSession" rows="4" required></textarea>
+
+    <label for="userTypes">User Types:</label>
+    <input type="text" id="userTypes" required>
+
+    <label for="technologyUsed">Technology Used:</label>
+    <input type="text" id="technologyUsed" required>
+
+    <button type="button" onclick="submitProject()">Submit</button>
+  </form>
+
+  <div id="projectCardsContainer"></div>
+
+  <script>
+    const submitProject = () => {
+      // Get project details from the form
+      var subject = document.getElementById('subject').value;
+      var descriptionSession = document.getElementById('descriptionSession').value;
+      var userTypes = document.getElementById('userTypes').value;
+      var technologyUsed = document.getElementById('technologyUsed').value;
+
+      // Create project object
+      var projectData = {
+        subject: subject,
+        descriptionSession: descriptionSession,
+        userTypes: userTypes,
+        technologyUsed: technologyUsed
+      };
+
+      // Retrieve existing projects from session storage
+      var existingProjects = JSON.parse(sessionStorage.getItem('projectDataArray')) || [];
+
+      // Add new project data to the array
+      existingProjects.push(projectData);
+
+      // Save the updated array back to session storage
+      sessionStorage.setItem('projectDataArray', JSON.stringify(existingProjects));
+
+      // Display the project card
+      displayProjectCard(projectData);
+    }
+
+    const loadExistingProjects = () => {
+      var existingProjects = JSON.parse(sessionStorage.getItem('projectDataArray')) || [];
+
+      // Display existing project cards
+      existingProjects.forEach(project => {
+        displayProjectCard(project);
+      });
+    }
+
+    const displayProjectCard = (projectData) => {
+      var projectCardsContainer = document.getElementById('projectCardsContainer');
+      var card = document.createElement('div');
+      card.classList.add('card');
+      card.innerHTML = `
+        <strong>Subject:</strong> ${projectData.subject} <br>
+        <strong>Description:</strong> ${projectData.descriptionSession} <br>
+        <strong>User Types:</strong> ${projectData.userTypes} <br>
+        <strong>Technology Used:</strong> ${projectData.technologyUsed}
+      `;
+
+      // Append card to the container
+      projectCardsContainer.appendChild(card);
+    }
+
+    // Load existing projects on page load
+    window.onload = () => {
+      loadExistingProjects();
+    };
+  </script>
+
+  <hr>
+  <hr>
+  <hr>
+  <hr>
+  <h2>User Registration and Login</h2>
+
+
+  <!-- Registration Form -->
+  <form id="registrationForm">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" required>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" required>
+
+    <button type="button" onclick="registerUser()">Register</button>
+  </form>
+  <br>
+
+  <!-- Login Form -->
+  <form id="loginForm">
+    <label for="loginEmail">Email:</label>
+    <input type="email" id="loginEmail" required>
+
+    <label for="loginPassword">Password:</label>
+    <input type="password" id="loginPassword" required>
+
+    <button type="button" onclick="loginUser()">Login</button>
+  </form>
+
+  <script>
+    const registerUser = () => {
+      var firstName = document.getElementById('firstName').value;
+      var lastName = document.getElementById('lastName').value;
+      var email = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+
+      var user = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password
+      };
+
+      // Retrieve existing users from local storage
+      var existingUsers = JSON.parse(localStorage.getItem('userArray')) || [];
+
+      // Check if the email is already registered
+      var isEmailTaken = existingUsers.some(user => {
+        return user.email === email;
+      });
+
+      if (!isEmailTaken) {
+        // Add new user to the array
+        existingUsers.push(user);
+
+        // Save the updated array back to local storage
+        localStorage.setItem('userArray', JSON.stringify(existingUsers));
+
+        alert('Registration successful!');
+      } else {
+        alert('Email is already registered. Please use a different email.');
+      }
+    }
+
+    const loginUser = () => {
+      var loginEmail = document.getElementById('loginEmail').value;
+      var loginPassword = document.getElementById('loginPassword').value;
+
+      // Retrieve existing users from local storage
+      var existingUsers = JSON.parse(localStorage.getItem('userArray')) || [];
+
+      // Check if the provided email and password match any stored user
+      var isLoginSuccessful = existingUsers.some(user => {
+        return user.email === loginEmail && user.password === loginPassword;
+      });
+
+      if (isLoginSuccessful) {
+        alert('Login successful!');
+      } else {
+        alert('Invalid email or password. Please try again.');
+      }
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+
+</html>
