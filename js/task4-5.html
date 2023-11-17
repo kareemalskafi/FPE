@@ -59,12 +59,12 @@
       const mobile = document.getElementById('mobile').value;
 
       if (name && email && mobile) {
-        const userInfoContainer = document.querySelector('.user-info-container').innerHTML=  
-        `
+        const userInfoContainer = document.querySelector('.user-info-container').innerHTML =
+          `
       <span style="background-color: green;">${name}</span>
       <span style="background-color: red;">${email}</span>
       <span style="background-color: yellow;">${mobile}</span>
-       `; 
+       `;
         // Clear input fields after printing info
         document.getElementById('name').value = '';
         document.getElementById('email').value = '';
@@ -118,4 +118,5 @@
 
 
 </body>
+
 </html>
