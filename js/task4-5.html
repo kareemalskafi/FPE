@@ -34,24 +34,18 @@
       margin-bottom: 10px;
     }
   </style>
-
-
 </head>
 
 <body>
 
   <h2>Task 4</h2>
-
   <div class="info-container">
     <label for="name">Name:</label>
     <input type="text" id="name">
-
     <label for="email">Email:</label>
     <input type="text" id="email">
-
     <label for="mobile">Mobile:</label>
     <input type="text" id="mobile">
-
     <button id="printBtn">Click On Me To Print</button>
   </div>
 
@@ -70,9 +64,7 @@
       <span style="background-color: green;">${name}</span>
       <span style="background-color: red;">${email}</span>
       <span style="background-color: yellow;">${mobile}</span>
-       `;
-
-    
+       `; 
         // Clear input fields after printing info
         document.getElementById('name').value = '';
         document.getElementById('email').value = '';
@@ -84,15 +76,10 @@
 
   </script>
 
-
-
-
   <hr>
   <hr>
   <h2>Task 5</h2>
-
   <button id="toggleBtn">Double Click to Show / Click to Hide Table</button>
-
   <table id="myTable">
     <thead>
       <tr>
@@ -114,11 +101,9 @@
       </tr>
     </tbody>
   </table>
-
   <script>
     const toggleBtn = document.getElementById('toggleBtn');
     const myTable = document.getElementById('myTable');
-
     toggleBtn.addEventListener('click', () => {
       if (myTable.style.display === 'none') {
         myTable.style.display = 'table';
@@ -132,10 +117,5 @@
   </script>
 
 
-
-
-
-
 </body>
-
 </html>
