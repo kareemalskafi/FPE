@@ -395,6 +395,25 @@
 												JavaScript on the client side for webpage behavior.</p>
 										</div>
 									</article>
+
+									<!-- Post -->
+									<article class="news-item box" onclick="showPostContent('csharp-task')">
+										<div class="news-item__image-wrap overlay overlay--45">
+											<div class="news-item__date">2023<span>Dec</span></div>
+											<a class="news-item__link"></a>
+											<img class="cover lazyload"
+												src="https://www.codingtxt.com/media/blog_images/csharp_banner.png"
+												alt="csharp" />
+										</div>
+										<div class="news-item__caption">
+											<h2 class="title title--h4">C# TASKS</h2>
+											<p style="text-align: justify;">C# is a general-purpose high-level
+												programming language supporting multiple paradigms. C# encompasses
+												static typing, strong typing, lexically scoped, imperative, declarative,
+												functional, generic, object-oriented, and component-oriented programming
+												disciplines.</p>
+										</div>
+									</article>
 								</div>
 							</div>
 
@@ -1085,14 +1104,66 @@
 						</a>
 						</div>
 
+						<div class="col-12 col-lg-3">
+							<a href="https://attendance-tracker-system-kareemalskafi.vercel.app/login.html" target="_blank" style="text-decoration: none;">
+							<div class="case-item">
+								<img class="case-item__icon" src="kareem/assets/icons/development.png" alt=""/>
+								<div>
+									<h3 class="title title--h4">Final Project <br> Attendance Tracker System</h3>
+								</div>
+							</div>
+						</a>
+						</div>
 
 					</div>
 				</div>
 				<a onclick="showPosts('news-item')" class="btn" style="padding: 20px;"> <i class="fa fa-backward"></i>&nbsp; Back</a>
 			</div>
 
-`		;
-			}
+`;
+
+			} else if (postId === 'csharp-task') {
+				document.getElementById('post-content').innerHTML = `
+				
+		 <div class="mt-1">
+ 			<div class="row">
+			
+ 				<div class="col-12 col-lg-3">
+ 					<a href="js/first-task-js/task1.html" target="_blank" style="text-decoration: none;">
+ 					<div class="case-item">
+ 						<img class="case-item__icon" src="kareem/assets/icons/development.png" alt=""/>
+ 						<div>
+ 							<h3 class="title title--h4">First Tasks Task 1</h3>
+ 						</div>
+ 					</div>
+ 				</a>
+ 				</div>
+
+
+ 				<div class="col-12 col-lg-3">
+ 					<a href="js/first-task-js/task2.html" target="_blank" style="text-decoration: none;">
+ 					<div class="case-item">
+ 						<img class="case-item__icon" src="kareem/assets/icons/development.png" alt=""/>
+ 						<div>
+ 							<h3 class="title title--h4">First Tasks Task 2</h3>
+ 						</div>
+ 					</div>
+ 				</a>
+ 				</div>
+			
+
+
+ 			</div>
+ 			<a onclick="showPosts('news-item')" class="btn" style="padding: 20px;"> <i class="fa fa-backward"></i>&nbsp; Back</a>
+ 			</div>	
+
+
+				`;}
+
+
+
+
+
 		}
 		function showPosts() {
 			// Show all post sections
